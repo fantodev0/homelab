@@ -1,0 +1,41 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: omlx-route
+    namespace: omlx
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:uY6u7aSaGTVY5T8B1m4=,iv:vwv/qcZ5DVd/NglPiCUO2F9Usv4+6M5RTuXLDNJiSXg=,tag:V8kjSO5zylnd9+g0WVH/Gw==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+          backendRefs:
+            - name: external-omlx
+              port: 8000
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBrUEFPRVd4d2lMVVQvWm5v
+            ZVZ2aE1ScE9EU0lsa2lKOW0wZldxa3RVTkZzCm50VDJJVXlwZGRSd0ZUbkFCWENX
+            V05lMHZpRktlTnhtSW1lRHY0TVJPZHcKLS0tIE9GMG52TUZGbFNyZEM1c0xCSVN3
+            TlhTVllCQ1NITmZPeGtJYWlRbWxsV3cKUyT/nyiu4sVfHGcjIET+f6zCwb269HzY
+            ofB1D9A7mEX/CBONuvndR0NqfD6pmMH54Id/+pPOVeMbMwYZBOIpvQ==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-11-14T08:54:40Z"
+    mac: ENC[AES256_GCM,data:ggX1JXsUxp18CGMKxNZv+lyVEzTaFOEDyScitsn63Dxvfok7t3lUS0IeXSmBBB++1obiEsmommsenxMDiOSt+sRVPjik+4eXnMcyySvRG8mdOcoTnOXWfHQ4iT7MpwUlxXeZWZ4yaolzjoi5X5XgOyiTbabzsZLuj5x4olZ+QP0=,iv:FlREh2wU9MAjZS7sVxqtfFCOy1LDxRkWg/gWx5mN+oU=,tag:BvycIrSCd5l2Kl+ysTSrew==,type:str]
+    version: 3.13.3
