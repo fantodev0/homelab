@@ -46,6 +46,7 @@ The inventory below follows the application directories enumerated by the commit
 | Explo | Music-oriented application delivered by Helm | [`apps/explo/`](../apps/explo/) |
 | Glance | Dashboard and homepage | [`apps/glance/`](../apps/glance/) |
 | Hermes | Utility service | [`apps/hermes/`](../apps/hermes/) |
+| Homepage | Kubernetes application dashboard (gethomepage) | [`apps/homepage/`](../apps/homepage/) |
 | ITTools | Developer and IT utilities | [`apps/ittools/`](../apps/ittools/) |
 | IPTV EPG | Electronic program guide service | [`apps/iptv-epg/`](../apps/iptv-epg/) |
 | Kutt | URL-shortening service | [`apps/kutt/`](../apps/kutt/) |
