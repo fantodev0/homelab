@@ -44,9 +44,8 @@ The inventory below follows the application directories enumerated by the commit
 | --- | --- | --- |
 | Arcane | Service management UI | [`apps/arcane/`](../apps/arcane/) |
 | Explo | Music-oriented application delivered by Helm | [`apps/explo/`](../apps/explo/) |
-| Glance | Dashboard and homepage | [`apps/glance/`](../apps/glance/) |
 | Hermes | Utility service | [`apps/hermes/`](../apps/hermes/) |
-| Homepage | Kubernetes application dashboard (gethomepage) | [`apps/homepage/`](../apps/homepage/) |
+| Homepage | Kubernetes application dashboard (gethomepage); main dashboard, replaces Glance | [`apps/homepage/`](../apps/homepage/) |
 | ITTools | Developer and IT utilities | [`apps/ittools/`](../apps/ittools/) |
 | IPTV EPG | Electronic program guide service | [`apps/iptv-epg/`](../apps/iptv-epg/) |
 | Kutt | URL-shortening service | [`apps/kutt/`](../apps/kutt/) |
@@ -60,6 +59,7 @@ The inventory below follows the application directories enumerated by the commit
 ## Tracked but not currently composed
 
 - [`apps/netbox/`](../apps/netbox/) contains a workload directory, but the current `apps/kustomization.yaml` does not include it.
+- [`apps/glance/`](../apps/glance/) is decommissioned: Glance was replaced by Homepage as the main dashboard. The directory is retained for rollback and is not included in `apps/kustomization.yaml`; Flux prunes its resources.
 - [`apps/base/`](../apps/base/) contains shared namespace, middleware, and secret resources rather than a standalone application entry.
 
 ## Reading an application directory

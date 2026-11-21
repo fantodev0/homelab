@@ -15,12 +15,12 @@ resources:
   - netalertx
   - n8n
   - hermes
+  - omlx
   - paperless
   - opencloud
   - pdf
   - immich
   - jellyfin
-  - glance
   - kutt
   - unifi
   - adguardhome-sync
@@ -30,5 +30,4 @@ resources:
   - ipmi
   - euro-office
   - open-webui
-  - omlx
   - homepage

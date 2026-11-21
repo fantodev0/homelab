@@ -8,7 +8,7 @@ spec:
           namespace: traefik
           sectionName: https
     hostnames:
-        - ENC[AES256_GCM,data:VigxePHG2tdSFS4mRgY=,iv:In/4cKMvMSd0cW0wc+NBD4zRDvCno9cVRImmkRJTKoc=,tag:G82NzawZLmmtRb665LReoA==,type:str]
+        - ENC[AES256_GCM,data:k4Tkv9WVa3joRllkUJM=,iv:Iln1foBCY2qZnbvwz3rOtifRKflBDlGojlwsHRs67Ow=,tag:unaSqbzNPjcbapMKhOQY2A==,type:str]
     rules:
         - matches:
             - path:
@@ -27,23 +27,23 @@ sops:
     age:
         - enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBZWVR6TkpSSEhidjFab0Q5
-            R2RuVVk1UG1heG9hOTludFdnWWlqbDFVSEhzCko3YkZHQ0pRZFlaQVhRNjg4eGZ3
-            N29LSXR0ZmlnbG5icjJ5dGF1aVgwYkUKLS0tIGZUejUzdGNsK1dMWG9KZ3Vob0NM
-            aTZKUjhJSWI2cDdQRG5NVk9US2FlRTQKKBmfmeEIPzfWn2rIBkHZqGB5lmW26SuK
-            6Zg33nZvoscZyeDnwZVrB5qi9jiEPgZ7nkr4eMaTkl5E7Wjlj/J+DA==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBENmhLakZBdFU2WUlXdUZG
+            VW8vTGNhNkM5QkE4NDJxRnlMVWFaa2xJUFVFCjFQclUzN0JadUtFbFlqRm50cFov
+            U0dUdnczTGMzc1V5MGF6R3UwZ2FJTmcKLS0tIGFteXJ5dEFSbkFhemN6ckFuQUdx
+            WVpxakhCMnVOcjk4bEwyUmRpak12QVkKCBJ1NayZtmVfhFJpgdVL260pcS3eYgeG
+            weVchnD+Ehj1y/MEELWi/We6CTJUpRW8srxAFfQz7rcSmNXE5xp62w==
             -----END AGE ENCRYPTED FILE-----
           recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
         - enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBGclAwRVBEbVBMOVJhbU8z
-            bzVJVUFzb1Y1Sjc4MjNBNnRleXpmbUN1UGpZCmpYSm9rZ2xHYWV1U0hoVHhkbWNO
-            QUpKeHRGSUNTbW40OE9kTEwycXJaZ1kKLS0tIHJaa3prTGw3UTNGU2pLTnZYbE9Q
-            NmtFK1VuajJmTmxCSnJFL0sxQ0NCYVEKq2/l6IpzBAqjFLPYQhq6M/TQlhulkWwZ
-            UvqeeUpO2kw2ZiwrcKHY1Eu9Iv+7cA+K+uO5VdoELvqdqvqp10K2OQ==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBJVFE0aW5SQ1lqTGpwZUpR
+            YVdBdExnVC9wcXpGeHUxcXJ2bUcyUDZ6YWp3Ckk0OWtKUG9ORWtxQlllSFRJQlBO
+            b3o2L2x5cnFmSWorcnNtQ0phMGZmZm8KLS0tICtMT3NvRm91UFVXTWFrdUZIZWFx
+            MzI1QXpYcVVBNGp3bDZJb2JsbUZwUEEKRfmyDBJi7z7JDtzJcESOCT+z0AuOiaRL
+            xdlRgPGNYSxEu6JS8IpHAUak4yFqk3tURo3Sx+Y1Y09nNssaJbaLEA==
             -----END AGE ENCRYPTED FILE-----
           recipient: age1rrecglktvwz8adkug540prvm2zfhkr9d939lvkpsw3gjzdznsueqz7968x
     encrypted_regex: ^(hostnames)$
-    lastmodified: "2026-11-21T15:23:50Z"
-    mac: ENC[AES256_GCM,data:pQ2wkNrKcoWCXB9x+fdQ5ROJNOSWyVxE6Al+68tM4uWlbsmdBB0MNX+rta6hUzRkQwOAlXAg0MT+HKVWbvWV+aSoMABHJi8iD0wDe6KR9se0XjB+18MyDJo+RghzM4AFgEnI9ET1j3DBB5yWZmVIBvRzJMAi0twIVxioxeia5QA=,iv:kvy2Iu93KPYnjUK+V49ZUQrz084VlA9Rj9pJmQwS1jw=,tag:jZsVR94arpOAr+jXJ/Lo9w==,type:str]
+    lastmodified: "2026-11-21T15:37:48Z"
+    mac: ENC[AES256_GCM,data:uA6wVVoIqtlaYXyFNm7RW1SzmCXVE1LbZTB9M7D8macUaOOst4tUw/ImkiAeAxad7tpoUfixDOga5X59d4flXHIIr/2F9QOjiCXcXjhTvloq8fc86pYMB+MMdWNNX3buI0SPnti3RjosuEzCyhtPmctYsmhu3YMcHKITRB/aE2o=,iv:gwANscbU1dfw7PySBwnaVfhmsFvrZznAZabaqcAJqA0=,tag:pKaG4SNVOhj422YT/YB+OA==,type:str]
     version: 3.13.3
