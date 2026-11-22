@@ -1,0 +1,54 @@
+services:
+  paperless-gpt:
+    image: ghcr.io/icereed/paperless-gpt:latest
+    container_name: paperless-gpt
+    restart: unless-stopped
+    ports:
+      - "3004:8080"
+    volumes:
+      - /mnt/dokploy/pgpt/data:/data
+      - /mnt/dokploy/pgpt/prompts:/app/prompts
+    environment:
+      PAPERLESS_BASE_URL: http://paperless:8000
+      PAPERLESS_API_TOKEN: ${PAPERLESS_API_TOKEN}
+
+      LLM_LANGUAGE: German
+      LLM_PROVIDER: openai
+      VISION_LLM_PROVIDER: openai
+
+      OPENAI_API_KEY: ${LM_STUDIO_API_TOKEN}
+      OPENAI_BASE_URL: ${LM_STUDIO_BASE_URL}
+
+      LLM_MODEL: ${LM_STUDIO_MODEL}
+      VISION_LLM_MODEL: ${LM_STUDIO_MODEL}
+
+      TOKEN_LIMIT: "16384"
+
+      OCR_PROVIDER: llm
+      OCR_PROCESS_MODE: image
+      OCR_SKIP_DIGITAL_PAGES: "true"
+      OCR_LIMIT_PAGES: "2"
+      OCR_MAX_RETRIES: "3"
+
+      IMAGE_MAX_RENDER_DPI: "250"
+      IMAGE_MAX_PIXEL_DIMENSION: "3000"
+      IMAGE_MAX_FILE_BYTES: "4194304"
+
+      AUTO_OCR_TAG: paperless-gpt-ocr-auto
+      AUTO_TAG: paperless-gpt-auto
+      MANUAL_TAG: paperless-gpt-manual
+      PDF_OCR_TAGGING: "true"
+      PDF_OCR_COMPLETE_TAG: paperless-gpt-ocr-complete
+      PDF_UPLOAD: "false"
+
+      CREATE_NEW_TAGS: "false"
+
+      LOG_LEVEL: info
+      AUTO_GENERATE_DOCUMENT_TYPE: "true"
+
+    networks:
+      - services
+
+networks:
+  services:
+    external: true
