@@ -19,8 +19,8 @@ services:
     environment:
       #PAPERLESS_CONSUMER_POLLING: "60"
       #PAPERLESS_CONSUMER_STABILITY_DELAY: "10"
-      PAPERLESS_ALLOWED_HOSTS: "paperless,paperless.fanto.dev,localhost"
-      PAPERLESS_URL: "https://paperless.fanto.dev"
+      PAPERLESS_ALLOWED_HOSTS: $HOSTS
+      PAPERLESS_URL: $DOMAIN
       PAPERLESS_SECRET_KEY: $PAPERLESS_SECRET_KEY
       PAPERLESS_REDIS: redis://redis:6379
       PAPERLESS_DBHOST: $PG_HOST
