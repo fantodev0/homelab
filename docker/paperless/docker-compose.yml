@@ -17,8 +17,6 @@ services:
         source: /mnt/media/Paperless
         target: /usr/src/paperless/media
     environment:
-      #PAPERLESS_CONSUMER_POLLING: "60"
-      #PAPERLESS_CONSUMER_STABILITY_DELAY: "10"
       PAPERLESS_ALLOWED_HOSTS: $HOSTS
       PAPERLESS_URL: $DOMAIN
       PAPERLESS_SECRET_KEY: $PAPERLESS_SECRET_KEY
@@ -95,8 +93,7 @@ services:
     image: docker.io/gotenberg/gotenberg:latest
     container_name: gotenberg
     restart: unless-stopped
-    labels:
-      - com.centurylinklabs.watchtower.monitor-only=true
+
     command:
       - gotenberg
       - --chromium-disable-javascript=true
