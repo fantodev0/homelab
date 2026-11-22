@@ -1,0 +1,31 @@
+services:
+  arcane:
+    image: ghcr.io/getarcaneapp/manager:latest
+    container_name: arcane
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./arcane:/app/data
+      - /root/services:/app/data/projects
+    env_file:
+      - .env
+    ports:
+      - "3002:3552"
+    environment:
+      - APP_URL
+      - PUID=1000
+      - PGID=1000
+      - ENCRYPTION_KEY
+      - JWT_SECRET
+    restart: unless-stopped
+    networks:
+      services:
+#        ipv4_address: 172.28.100.2
+
+networks:
+  services:
+    name: services
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.100.0/24
+          gateway: 172.28.100.1
