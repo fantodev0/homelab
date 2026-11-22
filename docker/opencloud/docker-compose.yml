@@ -1,0 +1,119 @@
+services:
+  opencloud:
+    image: opencloudeu/opencloud:latest
+    container_name: opencloud
+    user: "1000:1000"
+
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["opencloud init || true; exec opencloud server"]
+
+    ports:
+      - "192.168.88.210:3006:9200"
+
+    environment:
+      OC_INSECURE: "true"
+      OC_URL: $OPENCLOUD_URL
+      OC_LOG_LEVEL: "${LOG_LEVEL:-warn}"
+      PROXY_HTTP_ADDR: "0.0.0.0:9200"
+      PROXY_TLS: "false"
+      IDM_ADMIN_PASSWORD: "${IDM_ADMIN_PASSWORD}"
+      OC_ADD_RUN_SERVICES: "notifications,auth-app,collaboration"
+
+      STORAGE_SYSTEM_OCIS_METADATA_BACKEND: "messagepack"
+      STORAGE_SHARES_OCIS_METADATA_BACKEND: "messagepack"
+      STORAGE_USERS_OCIS_METADATA_BACKEND: "messagepack"
+
+      # Email notifications
+      NOTIFICATIONS_SMTP_HOST: "${SMTP_HOST}"
+      NOTIFICATIONS_SMTP_PORT: "${SMTP_PORT}"
+      NOTIFICATIONS_SMTP_SENDER: "${SMTP_SENDER}"
+      NOTIFICATIONS_SMTP_USERNAME: "${SMTP_USERNAME}"
+      NOTIFICATIONS_SMTP_PASSWORD: "${SMTP_PASSWORD}"
+      NOTIFICATIONS_SMTP_INSECURE: "${SMTP_INSECURE:-false}"
+
+      # Calendar and contacts via Radicale
+      PROXY_ADDITIONAL_ROUTES: >-
+        [{"type":"proxy","path":"/.well-known/caldav","target":"http://radicale:5232/caldav/"},
+        {"type":"proxy","path":"/.well-known/carddav","target":"http://radicale:5232/carddav/"},
+        {"type":"proxy","path":"/caldav","target":"http://radicale:5232/caldav/"},
+        {"type":"proxy","path":"/carddav","target":"http://radicale:5232/carddav/"},
+        {"type":"proxy","path":"/apps/calendar","target":"http://radicale:5232/"}]
+
+      PROXY_CSP_CONFIG_FILE_LOCATION: "/etc/opencloud/csp.yaml"
+      WEB_CONFIG_EXTRA: >-
+        {"applications":[{"id":"calendar","name":"Calendar","uri":"/apps/calendar","menu":"navigation"}]}
+      WEB_UI_CONFIG: >-
+        {"apps":["files","search","settings","calendar"]}
+
+      PROXY_OIDC_REWRITE_PATH_EXCLUSIONS: "/caldav,/carddav,/.web"
+      OC_PASSWORD_POLICY_MIN_CHARACTERS: "8"
+      OC_DEFAULT_LANGUAGE: "de"
+
+      # Euro Office
+      EURO_OFFICE_DOMAIN: "${EURO_OFFICE_DOMAIN}"
+      COLLABORATION_WOPI_SRC: $OPENCLOUD_URL
+      COLLABORATION_APP_NAME: "Euro-Office"
+      COLLABORATION_APP_PRODUCT: "OnlyOffice"
+      COLLABORATION_APP_ADDR: "https://${EURO_OFFICE_DOMAIN}"
+      COLLABORATION_APP_ICON: "https://${EURO_OFFICE_DOMAIN}/web-apps/apps/documenteditor/main/resources/img/favicon.ico"
+      COLLABORATION_APP_INSECURE: "${INSECURE}"
+      COLLABORATION_CS3API_DATAGATEWAY_INSECURE: "${INSECURE}"
+      COLLABORATION_APP_PROOF_DISABLE: "true"
+
+    volumes:
+      - /mnt/iscsi/opencloud/csp.yaml:/etc/opencloud/csp.yaml:ro
+      - /mnt/iscsi/opencloud/config:/etc/opencloud
+      - /mnt/iscsi/opencloud/data:/var/lib/opencloud
+      - /mnt/iscsi/opencloud/apps:/var/lib/opencloud/web/assets/apps
+
+      - /mnt/iscsi/opencloud/config/proxy.yaml:/etc/opencloud/proxy.yaml:ro
+      - /mnt/iscsi/opencloud/config/app-registry.yaml:/etc/opencloud/app-registry.yaml:ro
+
+
+    restart: unless-stopped
+    networks:
+      - services
+
+  radicale:
+    container_name: radicale
+    image: opencloudeu/radicale:latest
+    user: "1000:1000"
+    environment:
+      TAKE_FILE_OWNERSHIP: "false"
+    volumes:
+      - /mnt/iscsi/opencloud/radicale/config:/etc/radicale/
+      - /mnt/iscsi/opencloud/radicale/data:/var/lib/radicale
+    restart: unless-stopped
+    networks:
+      - services
+
+  euro-office:
+    image: docker pull ghcr.io/euro-office/documentserver:v9.3.8
+    container_name: euro-office
+    ports:
+      - "192.168.88.210:3007:80"
+    environment:
+      WOPI_ENABLED: "true"
+      USE_UNAUTHORIZED_STORAGE: "${INSECURE:-false}"
+      JWT_SECRET: "${EURO_OFFICE_JWT_SECRET}"
+    volumes:
+      - /usr/share/fonts/truetype:/usr/share/fonts/truetype/more:ro
+    restart: unless-stopped
+    networks:
+      - services
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "bash",
+          "-c",
+          "exec 3<>/dev/tcp/127.0.0.1/80 && printf 'GET /hosting/discovery HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3 && cat <&3 | head -1 | grep -q '200 OK'"
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+
+networks:
+  services:
+    external: true
