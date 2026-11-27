@@ -15,7 +15,6 @@ resources:
   - netalertx
   - n8n
   - hermes
-  - omlx
   - paperless
   - opencloud
   - pdf
