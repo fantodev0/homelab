@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: wallos
+resources:
+  - ../base
+  - configmap.yaml
+  - deployment.yaml
+  - httproute.yaml
+  - pvc.yaml
+  - service.yaml
+
+images:
+  - name: bellamy/wallos
+    newTag: "5.11.3"
+    digest: sha256:84c3b218e144a1292b2be6ad2f0b9d620277e860d307c3cfa5aff3ee629aae17

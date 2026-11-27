@@ -1,0 +1,41 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: wallos-route
+    namespace: wallos
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:BKbF2h0bZzShy07ZHxw6jw==,iv:TDX0034IrZRJj2/yz+QzHMvbOjZqSGPS7VN+UCdTSPY=,tag:ck/8lFdowDDIZS+QzJpGgQ==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+          backendRefs:
+            - name: wallos
+              port: 80
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAyTHoyS3RHQzV6djBjT0ox
+            SVZ1aXB3Um1YSGpXN21lREtJWWZpQ3ZjWTE4ClZRTGpPTFhZQlhNQUJJMHVyM0Fv
+            VTh1eXQySHBQREZXUjFZS0tzZFBjWDgKLS0tICtnZm15TmtJMnF0OEh1Y2ZEamlh
+            Wk03UUs0dTdNdC9iamR0dzVVMmN5L2MKH0P0Vfwxkyax1G2jRDXfaN3wKoptmNmx
+            QkWGHSGl415g1z9hgd7/v5WNGgMDhSNPjndPX8mDpzvXB9BFA/HHtA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-11-27T19:54:07Z"
+    mac: ENC[AES256_GCM,data:RCzHq42VVg0CG+PM14FNRbni+N4KCo/ESjdC0xBVPkuYfGNGTsqmlBlZ7nVmsWOMp6zjDIh08MvokKM3tgoaRoA03SEXQ8OUBDndD4TZYryH5VbbREuw1XOOa64Ts3+2BL6+iR9BMRuaBoyUKti0Bpzi6zLrjCUu+vDOp7Pefqc=,iv:oqZ/suQmhtH5koG6prpwkNwAbU74qDCVjswRkx0UEc0=,tag:JDIw+zXMTHU6BgB5HTX52w==,type:str]
+    version: 3.13.3

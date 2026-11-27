@@ -20,6 +20,7 @@ The inventory below follows the application directories enumerated by the commit
 | Application | Purpose | Manifests |
 | --- | --- | --- |
 | Actual Budget | Personal finance application | [`apps/actual-budget/`](../apps/actual-budget/) |
+| Wallos | Subscription and expense tracking | [`apps/wallos/`](../apps/wallos/) |
 | Affine | Collaborative workspace and knowledge management | [`apps/affine/`](../apps/affine/) |
 | Linkwarden | Bookmark and link archiving | [`apps/linkwarden/`](../apps/linkwarden/) |
 | n8n | Workflow automation | [`apps/n8n/`](../apps/n8n/) |

@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: wallos-config
+    namespace: wallos
+    labels:
+        app: wallos
+data:
+    TZ: ENC[AES256_GCM,data:SF6XBA0oL4dS8BWq1w==,iv:XU19PGyIXD1vBCgd/QCA2iwMsMRM27EygjrTr6YTtZ0=,tag:EZJZdswmv7rYF6ZRbGduwA==,type:str]
+    PUID: ENC[AES256_GCM,data:h+M=,iv:yaT7/wtfz0anPxOQ3SH+RS4nz5f5ueRgrx76AoTLtuo=,tag:fVcCYdfh9VrLZL/arWOGEw==,type:str]
+    PGID: ENC[AES256_GCM,data:uNs=,iv:Bc3Si5fwVX4tU5SjM/Iqba9T1/19WTKIeqYdC1FVaC4=,tag:p7i0zeqZ1fgGlYmVF68vuQ==,type:str]
+    WALLOS_SERVER_URL: ENC[AES256_GCM,data:IELOTm9oqLIVwdAoHxYj3cutZz8eJ/ur,iv:/ULsmsxsHe4ltgBMoTY4SmtHwVcWIp+SkjA5mdGdRZk=,tag:h9vU1+evQULMwwnRGn/9RQ==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBOcXJIMkFhUityTEVMcUla
+            V2lSKzJ2RGVOYytMc1BUYkkxeXNzam5QSnk0ClptbDZqVlVmQmlIMEhETXhmZnNP
+            MmZweFpULzM2amlpRjdkVUIzbFV4TlkKLS0tIDdleGVvQ0ZWUUlRYys2bm1OZkp5
+            UlE5ai9wK1RFdHUzY0JqVVQrUi9aOUkKaj4PPLXRVtfOdMjyohuJ2dMxEhYYOx97
+            OdBWvUkUZz7be64J9pjYw4wOSUlEiiZwVwMwwuUO37eFQtTF5dp0qw==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-11-27T19:54:07Z"
+    mac: ENC[AES256_GCM,data:8EYX3/YbqNELyU3OTflfps+g01kuS4KWHrY6OWDcpvPvvtnNlxA+sTtbpXBaNftOF8K5b7mey4ncKGWV6u99PRtqqkVOqfKOGpBrlXuVo72I3youRWm86TfrUptb0vzV6RBFhkz+rFtL/jbP2Oq0qR8rUJRWrtTnfF/M2AU2hbE=,iv:VtMT6HBZgQ23WQVzxe8VMF8jDQznvO4ZSZ/C5u+PpUo=,tag:5lAndGEzEJJyyrcv6TVUng==,type:str]
+    version: 3.13.3
