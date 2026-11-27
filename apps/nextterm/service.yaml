@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nexterm
+spec:
+  type: ClusterIP
+  selector:
+    app: nexterm
+  ports:
+    - name: http
+      protocol: TCP
+      port: 6989
+      targetPort: http

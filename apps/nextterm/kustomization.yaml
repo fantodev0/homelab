@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: nexterm
+resources:
+  - ../base
+  - deployment.yaml
+  - httproute.yaml
+  - pvc.yaml
+  - secret.yaml
+  - service.yaml
+
+images:
+  - name: nexterm/aio
+    newTag: latest
+    digest: sha256:def6f6a50b48c842d3fbe796ff8e7ce6b8fa54e2d92116a62742859c64f47d7e

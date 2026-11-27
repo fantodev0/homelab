@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nexterm
+  labels:
+    app: nexterm
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nexterm
+  template:
+    metadata:
+      labels:
+        app: nexterm
+    spec:
+      containers:
+        - name: nexterm
+          image: nexterm/aio
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 6989
+              name: http
+          env:
+            - name: TZ
+              value: "Europe/Berlin"
+          envFrom:
+            - secretRef:
+                name: nexterm-secrets
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: "2"
+              memory: 2Gi
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 15
+            timeoutSeconds: 3
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 3
+            failureThreshold: 3
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: nexterm-data
+      restartPolicy: Always
